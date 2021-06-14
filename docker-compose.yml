@@ -1,0 +1,62 @@
+version: '3.7'
+
+networks:
+  custom:
+    driver: bridge
+
+services:
+  control:
+    image: pragra/ansible
+    ports:
+      - "8000:8000"
+      - "2222:22"
+    environment:
+      CODEBOX_USERNAME: pragra
+      CODEBOX_PASSWORD: pragra
+    volumes:
+      - ./code:/workspace
+    networks:
+      - custom
+    container_name: ansible
+    domainname: pragra.co
+    hostname: ansible
+  lb:
+    image: pragra/ubuntu
+    container_name: lb
+    ports:
+       - "2223:22"
+       - "8080:80"
+    networks:
+      - custom
+    domainname: pragra.co
+    hostname: lb
+  app1:
+    image: pragra/ubuntu
+    ports:
+       - "2224:22"
+       - "81:80"
+    networks:
+      - custom
+    container_name: app1
+    domainname: pragra.co
+    hostname: app1
+  app2:
+    image: pragra/ubuntu
+    ports:
+      - "2225:22"
+      - "82:80"
+    networks:
+      - custom
+    container_name: app2
+    domainname: pragra.co
+    hostname: app2
+  db:
+    image: pragra/ubuntu
+    ports:
+      - "2226:22"
+      - "3306:3306"
+    networks:
+      - custom
+    container_name: db
+    domainname: pragra.co
+    hostname: db
