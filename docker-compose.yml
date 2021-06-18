@@ -64,33 +64,21 @@ services:
     image: pragra/centos
     ports:
       - "2227:22"
-      - "3306:3306"
-      - "83": "8080"
-      - "84": "80"
+      - "83:8080"
+      - "84:80"
     networks:
       - custom
-    container_name: db
+    container_name: uat1
     domainname: pragra.co
-    hostname: db
-    uat1:
-      image: pragra/centos
-      ports:
-        - "2227:22"
-        - "83": "8080"
-        - "84": "80"
-      networks:
-        - custom
-      container_name: uat1
-      domainname: pragra.co
-      hostname: uat1
-      uat2:
-        image: pragra/centos
-        ports:
-          - "2229:22"
-          - "85": "8080"
-          - "86": "80"
-        networks:
-          - custom
-        container_name: uat2
-        domainname: pragra.co
-        hostname: uat2
+    hostname: uat1
+  uat2:
+    image: pragra/centos
+    ports:
+      - "2229:22"
+      - "85:8080"
+      - "86:80"
+    networks:
+      - custom
+    container_name: uat2
+    domainname: pragra.co
+    hostname: uat2
